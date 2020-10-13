@@ -6,11 +6,7 @@ import { v1 as uuid } from "uuid";
 
 export default class App extends Component {
   state = {
-    items: [
-      { id: 1, title: "wake up" },
-      { id: 2, title: "brush teeth" },
-      { id: 3, title: "make breakfast" },
-    ],
+    items: [],
     id: uuid(),
     title: "",
     item: "",
@@ -18,23 +14,36 @@ export default class App extends Component {
   };
 
   handleChange = (e) => {
-    console.log("Handle Change");
+    //console.log("Handle Change");
+    this.setState({ item: e.target.value });
   };
   handleSubmit = (e) => {
-    console.log("Handle Submit");
+    //console.log("Handle Submit");
+    e.preventDefault();
+    const newItem = { id: this.state.id, title: this.state.item };
+    const updatedItems = [...this.state.items, newItem];
+    this.setState({
+      items: updatedItems,
+      item: "",
+      id: uuid(),
+      editItem: false,
+    });
   };
   handleEdit = (id) => {
     console.log(`Handle edit : ${id}`);
   };
   handleDelete = (id) => {
-    console.log(`Handle edit : ${id}`);
+    //console.log(`Handle Delete : ${id}`);
+    const filteredItems = this.state.items.filter((item) => item.id !== id);
+    this.setState({ items: filteredItems });
   };
   clearList = (e) => {
-    console.log("Clear List");
+    //console.log("Clear List");
+    this.setState({ items: [] });
   };
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     return (
       <div className="container">
         <div className="row">

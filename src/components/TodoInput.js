@@ -21,6 +21,7 @@ export default class TodoInput extends Component {
             />
           </div>
           <button
+            disabled={!item.length}
             type="submit"
             className="btn btn-block btn-primary mt-3 text-capitalize"
           >
